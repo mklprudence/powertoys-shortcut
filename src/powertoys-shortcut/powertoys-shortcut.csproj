@@ -13,6 +13,15 @@
     <Reference Include="PowerToys.ManagedCommon">
       <HintPath>..\libs\PowerToys.ManagedCommon.dll</HintPath>
     </Reference>
+    <Reference Include="PowerToys.ManagedTelemetry">
+      <HintPath>..\libs\PowerToys.ManagedTelemetry.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerToys.Settings">
+      <HintPath>..\libs\PowerToys.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerToys.Settings.UI.Lib">
+      <HintPath>..\libs\PowerToys.Settings.UI.Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Wox.Infrastructure">
       <HintPath>..\libs\Wox.Infrastructure.dll</HintPath>
     </Reference>

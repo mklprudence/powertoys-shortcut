@@ -1,19 +1,24 @@
 ﻿using ManagedCommon;
 using Microsoft.PowerToys.Settings.UI.Library;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Wox.Plugin;
 
 namespace powertoys.shortcut
 {
-    public class Main : IPlugin
+    public class Main : IPlugin, ISettingProvider
     {
-        private string IconPath { get; set; }
+        private PluginInitContext _context;
 
-        private PluginInitContext Context { get; set; }
+        // Settings Val
+        private bool _test;
+
         public string Name => "Shortcut";
 
         public string Description => "Customized Shortcut and Actions";
+
+        private string IconPath { get; set; }
 
         public IEnumerable<PluginAdditionalOption> AdditionalOptions => new List<PluginAdditionalOption>()
         {
@@ -27,9 +32,9 @@ namespace powertoys.shortcut
 
         public void Init(PluginInitContext context)
         {
-            Context = context;
-            Context.API.ThemeChanged += OnThemeChanged;
-            UpdateIconPath(Context.API.GetCurrentTheme());
+            _context = context;
+            _context.API.ThemeChanged += OnThemeChanged;
+            UpdateIconPath(_context.API.GetCurrentTheme());
         }
 
         public List<Result> Query(Query query)
@@ -40,7 +45,7 @@ namespace powertoys.shortcut
             {
                 new Result
                 {
-                    Title = search,
+                    Title = search + _test,
                     IcoPath = IconPath,
                     Action = e =>
                     {
@@ -66,6 +71,23 @@ namespace powertoys.shortcut
         private void OnThemeChanged(Theme currentTheme, Theme newTheme)
         {
             UpdateIconPath(newTheme);
+        }
+
+        public System.Windows.Controls.Control CreateSettingPanel()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateSettings(PowerLauncherPluginSettings settings)
+        {
+            var test = false;
+
+            if (settings != null && settings.AdditionalOptions != null)
+            {
+                test = settings.AdditionalOptions.FirstOrDefault(x => x.Key == "Test")?.Value ?? test;
+            }
+
+            _test = test;
         }
     }
 }
