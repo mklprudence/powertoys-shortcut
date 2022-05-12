@@ -1,0 +1,14 @@
+{
+  "ID": "C4744943D0549B8F1A68A4338753C965",
+  "Disabled": false,
+  "ActionKeyword": "guid",
+  "Name": "Shortcut",
+  "Author": "mklprudence",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://github.com/skttl/powertoys-run-guid",
+  "ExecuteFileName": "powertoys-shortcut.dll",
+  "IsGlobal": true,
+  "IcoPathDark": "images/guid.dark.png",
+  "IcoPathLight": "images/guid.light.png"
+}
