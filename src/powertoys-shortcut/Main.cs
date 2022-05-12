@@ -2,6 +2,7 @@
 using Microsoft.PowerToys.Settings.UI.Library;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Wox.Plugin;
 
@@ -75,7 +76,10 @@ namespace powertoys.shortcut
 
         public System.Windows.Controls.Control CreateSettingPanel()
         {
-            throw new System.NotImplementedException();
+            System.Windows.Controls.ListBox list = new System.Windows.Controls.ListBox();
+            list.Items.Add("one");
+            list.Items.Add("two");
+            return list;
         }
 
         public void UpdateSettings(PowerLauncherPluginSettings settings)
