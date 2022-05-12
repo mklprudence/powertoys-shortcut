@@ -6,7 +6,7 @@
   "Author": "mklprudence",
   "Version": "1.0.0",
   "Language": "csharp",
-  "Website": "https://github.com/skttl/powertoys-run-guid",
+  "Website": "https://github.com/mklprudence/powertoys-shortcut",
   "ExecuteFileName": "powertoys-shortcut.dll",
   "IsGlobal": true,
   "IcoPathDark": "images/guid.dark.png",
