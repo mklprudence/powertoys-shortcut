@@ -11,9 +11,10 @@ using Wox.Plugin;
 
 namespace powertoys.shortcut
 {
-    public class Main : IPlugin, ISettingProvider
+    public class Main : IPlugin, ISettingProvider, IContextMenu
     {
         private PluginInitContext _context;
+        private ConfigHelper _configHelper;
 
         // IPlugin properties
         public string Name => "Shortcut";
@@ -24,11 +25,6 @@ namespace powertoys.shortcut
 
         // Result Icon Path
         private string IconPath { get; set; }
-
-        // Config
-        private string ConfigPath = "NA";
-        private Config? config;
-        
         public IEnumerable<PluginAdditionalOption> AdditionalOptions => new List<PluginAdditionalOption>()
         {
             new PluginAdditionalOption()
@@ -45,8 +41,7 @@ namespace powertoys.shortcut
             _context = context;
             _context.API.ThemeChanged += OnThemeChanged;
             UpdateIconPath(_context.API.GetCurrentTheme());
-            ConfigPath = _context.CurrentPluginMetadata.PluginDirectory + @"\config.json";
-            UpdateConfig();
+            _configHelper = new ConfigHelper(_context.CurrentPluginMetadata.PluginDirectory + @"\config.json");
         }
 
         private void UpdateIconPath(Theme theme)
@@ -66,12 +61,6 @@ namespace powertoys.shortcut
             UpdateIconPath(newTheme);
         }
 
-        private void UpdateConfig()
-        {
-            string filetext = System.IO.File.ReadAllText(ConfigPath);
-            config = JsonSerializer.Deserialize<Config>(filetext);
-        }
-
         // Settings
         public void UpdateSettings(PowerLauncherPluginSettings settings)
         {
@@ -84,7 +73,7 @@ namespace powertoys.shortcut
 
             _test = test;
 
-            UpdateConfig();
+            _configHelper.updateConfig();
         }
 
         public System.Windows.Controls.Control CreateSettingPanel()
@@ -95,8 +84,9 @@ namespace powertoys.shortcut
         // Query
         public List<Result> Query(Query query)
         {
+            Config config = _configHelper.config;
+            
             var search = query.Search;
-
             var key = search.Split(" ")[0];
 
             if (config?.Shortcuts.ContainsKey(key) == true)
@@ -129,6 +119,12 @@ namespace powertoys.shortcut
                     },
                 }
             };
+        }
+
+        // Context Menus
+        public List<ContextMenuResult> LoadContextMenus(Result selectedResult)
+        {
+            throw new NotImplementedException();
         }
     }
 }
