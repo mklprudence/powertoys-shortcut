@@ -34,6 +34,9 @@
     <Folder Include="images\">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Folder>
+    <None Update="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="plugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

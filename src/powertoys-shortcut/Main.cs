@@ -1,7 +1,10 @@
 ﻿using ManagedCommon;
 using Microsoft.PowerToys.Settings.UI.Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using Wox.Plugin;
@@ -12,15 +15,20 @@ namespace powertoys.shortcut
     {
         private PluginInitContext _context;
 
-        // Settings Val
-        private bool _test;
-
+        // IPlugin properties
         public string Name => "Shortcut";
-
         public string Description => "Customized Shortcut and Actions";
 
+        // Settings val
+        private bool _test;
+
+        // Result Icon Path
         private string IconPath { get; set; }
 
+        // Config
+        private string ConfigPath = "NA";
+        private Config? config;
+        
         public IEnumerable<PluginAdditionalOption> AdditionalOptions => new List<PluginAdditionalOption>()
         {
             new PluginAdditionalOption()
@@ -31,30 +39,14 @@ namespace powertoys.shortcut
             },
         };
 
+        // Init
         public void Init(PluginInitContext context)
         {
             _context = context;
             _context.API.ThemeChanged += OnThemeChanged;
             UpdateIconPath(_context.API.GetCurrentTheme());
-        }
-
-        public List<Result> Query(Query query)
-        {
-            var search = query.Search;
-            
-            return new List<Result>
-            {
-                new Result
-                {
-                    Title = search + _test,
-                    IcoPath = IconPath,
-                    Action = e =>
-                    {
-                        Clipboard.SetText(search);
-                        return true;
-                    },
-                }
-            };
+            ConfigPath = _context.CurrentPluginMetadata.PluginDirectory + @"\config.json";
+            UpdateConfig();
         }
 
         private void UpdateIconPath(Theme theme)
@@ -74,14 +66,13 @@ namespace powertoys.shortcut
             UpdateIconPath(newTheme);
         }
 
-        public System.Windows.Controls.Control CreateSettingPanel()
+        private void UpdateConfig()
         {
-            System.Windows.Controls.ListBox list = new System.Windows.Controls.ListBox();
-            list.Items.Add("one");
-            list.Items.Add("two");
-            return list;
+            string filetext = System.IO.File.ReadAllText(ConfigPath);
+            config = JsonSerializer.Deserialize<Config>(filetext);
         }
 
+        // Settings
         public void UpdateSettings(PowerLauncherPluginSettings settings)
         {
             var test = false;
@@ -92,6 +83,62 @@ namespace powertoys.shortcut
             }
 
             _test = test;
+
+            UpdateConfig();
         }
+
+        public System.Windows.Controls.Control CreateSettingPanel()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        // Query
+        public List<Result> Query(Query query)
+        {
+            var search = query.Search;
+
+            var key = search.Split(" ")[0];
+
+            if (config?.Shortcuts.ContainsKey(key) == true)
+            {
+                var action = config?.Shortcuts[key].Action;
+                return new List<Result>
+                {
+                    new Result
+                    {
+                        Title = action,
+                        IcoPath = IconPath,
+                        Action = e =>
+                        {
+                            Clipboard.SetText(action);
+                            return true;
+                        },
+                    }
+                };
+            }
+
+            return new List<Result>
+            {
+                new Result
+                {
+                    Title = "No such shortcut",
+                    IcoPath = IconPath,
+                    Action = e =>
+                    {
+                        return true;
+                    },
+                }
+            };
+        }
+    }
+
+    public class Config
+    {
+        public Dictionary<string, Shortcut>? Shortcuts { get; set; }
+    }
+
+    public class Shortcut
+    {
+        public string Action { get; set; }
     }
 }

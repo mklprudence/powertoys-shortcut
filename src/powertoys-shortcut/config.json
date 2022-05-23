@@ -1,0 +1,10 @@
+{
+    "Shortcuts" : {
+        "im" : {
+            "Action" : "chrome im"
+        },
+        "mfpo" : {
+            "Action" : "chrome mfpo"
+        }
+    }
+}
