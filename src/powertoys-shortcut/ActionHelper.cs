@@ -31,7 +31,11 @@ namespace powertoys.shortcut
 
             if (type == "url")
             {
-                Process.Start(arg);
+                Process.Start(new ProcessStartInfo(arg)
+                {
+                    UseShellExecute = true,
+                    CreateNoWindow = true
+                });
             } else if (type == "cmd")
             {
                 Process.Start(new ProcessStartInfo(arg)
