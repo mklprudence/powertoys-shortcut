@@ -1,9 +1,11 @@
 {
     "Shortcuts" : {
         "im" : {
+            "Description" : "Searching $0 on Google Image",
             "Action" : "chrome im"
         },
         "mfpo" : {
+            "Description" : "Opening MFPO",
             "Action" : "chrome mfpo"
         }
     }

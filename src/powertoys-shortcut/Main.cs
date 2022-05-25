@@ -1,5 +1,6 @@
 ﻿using ManagedCommon;
 using Microsoft.PowerToys.Settings.UI.Library;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace powertoys.shortcut
     public class Main : IPlugin, ISettingProvider, IContextMenu
     {
         private PluginInitContext _context;
-        private ConfigHelper _configHelper;
+        public ConfigHelper _configHelper;
+        public ResultHelper _resultHelper;
 
         // IPlugin properties
         public string Name => "Shortcut";
@@ -24,7 +26,7 @@ namespace powertoys.shortcut
         private bool _test;
 
         // Result Icon Path
-        private string IconPath { get; set; }
+        public string IconPath { get; set; }
         public IEnumerable<PluginAdditionalOption> AdditionalOptions => new List<PluginAdditionalOption>()
         {
             new PluginAdditionalOption()
@@ -41,7 +43,10 @@ namespace powertoys.shortcut
             _context = context;
             _context.API.ThemeChanged += OnThemeChanged;
             UpdateIconPath(_context.API.GetCurrentTheme());
-            _configHelper = new ConfigHelper(_context.CurrentPluginMetadata.PluginDirectory + @"\config.json");
+
+            // Helpers
+            _configHelper = new ConfigHelper(this, _context.CurrentPluginMetadata.PluginDirectory + @"\config.json");
+            _resultHelper = new ResultHelper(this);
         }
 
         private void UpdateIconPath(Theme theme)
@@ -118,7 +123,7 @@ namespace powertoys.shortcut
                         return true;
                     },
                 }
-            };
+            }; 
         }
 
         // Context Menus
