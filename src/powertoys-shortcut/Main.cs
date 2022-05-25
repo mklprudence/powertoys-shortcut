@@ -77,8 +77,6 @@ namespace powertoys.shortcut
             }
 
             _test = test;
-
-            _configHelper.updateConfig();
         }
 
         public System.Windows.Controls.Control CreateSettingPanel()
