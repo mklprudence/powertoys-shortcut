@@ -90,7 +90,7 @@ namespace powertoys.shortcut
                 IcoPath = parent.IconPath,
                 Action = e =>
                 {
-                    Clipboard.SetText(action);
+                    parent._actionHelper.execute(action);
                     return true;
                 },
             };

@@ -3,12 +3,12 @@
         "im" : {
             "Title" : "Google Image Search",
             "Description" : "Searching $0 on Google Image",
-            "Action" : "chrome im $0"
+            "Action" : "url::im $0"
         },
         "google" : {
             "Title" : "Google",
             "Description" : "Opening Google",
-            "Action" : "chrome google"
+            "Action" : "url::google"
         }
     }
 }

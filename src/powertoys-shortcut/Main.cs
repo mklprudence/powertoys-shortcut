@@ -17,6 +17,7 @@ namespace powertoys.shortcut
         private PluginInitContext _context;
         public ConfigHelper _configHelper;
         public ResultHelper _resultHelper;
+        public ActionHelper _actionHelper;
 
         // IPlugin properties
         public string Name => "Shortcut";
@@ -47,6 +48,7 @@ namespace powertoys.shortcut
             // Helpers
             _configHelper = new ConfigHelper(this, _context.CurrentPluginMetadata.PluginDirectory + @"\config.json");
             _resultHelper = new ResultHelper(this);
+            _actionHelper = new ActionHelper(this);
         }
 
         private void UpdateIconPath(Theme theme)
