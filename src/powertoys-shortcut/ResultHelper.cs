@@ -85,8 +85,8 @@ namespace powertoys.shortcut
         {
             return new Result
             {
-                Title = action,
-                SubTitle = desc,
+                Title = desc,
+                SubTitle = string.Format("[%s]", key),
                 IcoPath = parent.IconPath,
                 Action = e =>
                 {
