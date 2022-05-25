@@ -8,7 +8,7 @@
         "google" : {
             "Title" : "Google",
             "Description" : "Opening Google",
-            "Action" : "url::google"
+            "Action" : "url::https://www.google.com"
         }
     }
 }
