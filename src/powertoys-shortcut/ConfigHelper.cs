@@ -8,10 +8,12 @@ namespace powertoys.shortcut
     public class ConfigHelper
     {
         string filepath;
+        Main parent;
         public Config config;
 
-        public ConfigHelper(string filepath)
+        public ConfigHelper(Main parent, string filepath)
         {
+            this.parent = parent;
             this.filepath = filepath;
             updateConfig();
         }
@@ -25,11 +27,12 @@ namespace powertoys.shortcut
 
     public class Config
     {
-        public Dictionary<string, Shortcut>? Shortcuts { get; set; }
+        public Dictionary<string, Shortcut> Shortcuts { get; set; }
     }
 
     public class Shortcut
     {
+        public string Description { get; set; }
         public string Action { get; set; }
     }
 }
