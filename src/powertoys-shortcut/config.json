@@ -3,7 +3,7 @@
         "im" : {
             "Title" : "Google Image Search",
             "Description" : "Searching $0 on Google Image",
-            "Action" : "url::im $0"
+            "Action" : "url::https://www.google.com/search?tbm=isch&q=$0"
         },
         "google" : {
             "Title" : "Google",
