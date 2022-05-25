@@ -92,38 +92,25 @@ namespace powertoys.shortcut
             Config config = _configHelper.config;
             
             var search = query.Search;
-            var key = search.Split(" ")[0];
+            var res = _resultHelper.interpret(search);
 
-            if (config?.Shortcuts.ContainsKey(key) == true)
+            if (res.Count == 0)
             {
-                var action = config?.Shortcuts[key].Action;
                 return new List<Result>
                 {
                     new Result
                     {
-                        Title = action,
+                        Title = "No such shortcut",
                         IcoPath = IconPath,
                         Action = e =>
                         {
-                            Clipboard.SetText(action);
                             return true;
                         },
                     }
                 };
             }
 
-            return new List<Result>
-            {
-                new Result
-                {
-                    Title = "No such shortcut",
-                    IcoPath = IconPath,
-                    Action = e =>
-                    {
-                        return true;
-                    },
-                }
-            }; 
+            return res.ConvertAll(i => i.toResult());
         }
 
         // Context Menus
