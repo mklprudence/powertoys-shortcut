@@ -36,12 +36,20 @@ namespace powertoys.shortcut
                     UseShellExecute = true,
                     CreateNoWindow = true
                 });
-            } else if (type == "cmd")
+            } else if (type == "file")
             {
                 Process.Start(new ProcessStartInfo(arg)
                 {
                     UseShellExecute = true,
                     CreateNoWindow = true
+                });
+            } else if (type == "cmd")
+            {
+                Process.Start(new ProcessStartInfo(@"C:\Windows\System32\cmd.exe")
+                {
+                    Arguments = arg,
+                    UseShellExecute = true,
+                    CreateNoWindow = false
                 });
             } else if (type == "clip")
             {
