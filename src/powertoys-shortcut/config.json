@@ -9,6 +9,11 @@
             "Title" : "Google",
             "Description" : "Opening Google",
             "Action" : "url::https://www.google.com"
+        }, 
+        "echo" : {
+            "Title" : "Echo", 
+            "Description" : "Echo test",
+            "Action" : "cmd::echo test"
         }
     }
 }
