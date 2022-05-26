@@ -55,11 +55,11 @@ namespace powertoys.shortcut
         {
             if (theme == Theme.Light || theme == Theme.HighContrastWhite)
             {
-                IconPath = "images/guid.light.png";
+                IconPath = "images/shortcut.light.png";
             }
             else
             {
-                IconPath = "images/guid.dark.png";
+                IconPath = "images/shortcut.dark.png";
             }
         }
 
