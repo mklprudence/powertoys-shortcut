@@ -13,7 +13,7 @@
         "echo" : {
             "Title" : "Echo", 
             "Description" : "Echo test",
-            "Action" : "cmd::echo test"
+            "Action" : "cmd::/k echo test"
         }
     }
 }
