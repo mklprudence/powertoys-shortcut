@@ -6,7 +6,8 @@ A Shortcut Plugin for PowerToys Run. Actions and shortcuts can be customized and
 
 **Minimum required version of PowerToys is 0.53.1 - make sure you've got this version installed.**
 
-Extract and copy the content of powertoys-shortcut.zip into `%PROGRAMFILES%\PowerToys\modules\launcher\Plugins` (or wherever your PowerToys is installed), and then restart PowerToys. 
+Head to [Releases](https://github.com/mklprudence/powertoys-shortcut/releases) and download the zip file for the latest release. 
+Follow the instruction on the Release Usage and install the plugin. 
 
 ## Usage
 
