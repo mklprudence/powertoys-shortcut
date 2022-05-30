@@ -56,7 +56,6 @@ namespace powertoys.shortcut
 
             // $i
             template = Regex.Replace(template, @"\$(\d*)", m => replaceargs(m, args));
-
             return template;
         }
 
