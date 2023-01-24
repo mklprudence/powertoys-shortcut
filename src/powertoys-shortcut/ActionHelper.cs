@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Windows;
 
@@ -51,7 +52,27 @@ namespace powertoys.shortcut
                     UseShellExecute = true,
                     CreateNoWindow = false
                 });
-            } else if (type == "clip")
+            }
+            else if (type == "start")
+            {
+                Process.Start(new ProcessStartInfo(split[1].Trim())
+                {
+                    Arguments = split[2].Trim(),
+                    UseShellExecute = false,
+                    CreateNoWindow = false
+                });
+            }
+            else if (type == "startasadmin")
+            {
+                Process.Start(new ProcessStartInfo(split[1].Trim())
+                {
+                    Arguments = split[2].Trim(),
+                    UseShellExecute = true,
+                    CreateNoWindow = false,
+                    Verb = "runas"
+                });
+            }
+            else if (type == "clip")
             {
                 Clipboard.SetText(arg);
             }

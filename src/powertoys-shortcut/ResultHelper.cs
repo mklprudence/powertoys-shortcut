@@ -51,10 +51,10 @@ namespace powertoys.shortcut
 
         private string insertparams(string template, string arg, string[] args)
         {
-            // $0
+            // $0 : All
             template = template.Replace(@"$0", arg);
 
-            // $i
+            // $i : Single
             template = Regex.Replace(template, @"\$(\d*)", m => replaceargs(m, args));
             return template;
         }
@@ -64,6 +64,11 @@ namespace powertoys.shortcut
             int index = Int32.Parse(m.Groups[1].Value);
             if (index > args.Length) return m.Groups[0].Value;
             return args[index - 1];
+        }
+
+        private enum FlagType
+        {
+            Single, Range, Plus
         }
     }
 

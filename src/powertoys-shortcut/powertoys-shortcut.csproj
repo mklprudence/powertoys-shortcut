@@ -34,7 +34,7 @@
     <Folder Include="images\">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Folder>
-    <None Update="config.json">
+    <None Update="config.example.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="images\shortcut.dark.png">

@@ -14,6 +14,16 @@
             "Title" : "Echo", 
             "Description" : "Echo test",
             "Action" : "cmd::/k echo test"
+        }, 
+        "calc": {
+            "Title" : "Calc",
+            "Description" : "Run Calc",
+            "Action" : "startasadmin::C:\\Windows\\system32\\calc.exe"
+        },
+        "admincalc": {
+          "Title": "Calc As Admin",
+          "Description": "Run Escalated Calc",
+          "Action": "start::C:\\Windows\\system32\\calc.exe"
         }
     }
 }
